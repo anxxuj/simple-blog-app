@@ -6,9 +6,18 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
+	"time"
 
 	"github.com/anxxuj/simple-blog-app/internal/models"
 )
+
+func humanDate(t time.Time) string {
+	return t.Format("02 Jan, 2006")
+}
+
+var functions = template.FuncMap{
+	"humanDate": humanDate,
+}
 
 func newTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
@@ -21,7 +30,7 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	for _, page := range pages {
 		name := filepath.Base(page)
 
-		ts, err := template.ParseFiles("./ui/html/base.html")
+		ts, err := template.New(name).Funcs(functions).ParseFiles("./ui/html/base.html")
 		if err != nil {
 			return nil, err
 		}

@@ -2,6 +2,6 @@
 
 {{define "main"}}
 <h1>{{.Post.Title}}</h1>
-<p>{{.Post.Created}}</p>
+<p><time>{{humanDate .Post.Created}}</time></p>
 <p>{{.Post.Content}}</p>
 {{end}}
