@@ -2,6 +2,7 @@ package models
 
 import (
 	"database/sql"
+	"errors"
 	"time"
 )
 
@@ -31,4 +32,23 @@ func (m *PostModel) Insert(title, content string) (int, error) {
 	}
 
 	return int(id), nil
+}
+
+func (m *PostModel) Get(id int) (*Post, error) {
+	stmt := "SELECT id, title, content, created FROM posts WHERE id = ?"
+
+	row := m.DB.QueryRow(stmt, id)
+
+	post := &Post{}
+
+	err := row.Scan(&post.Id, &post.Title, &post.Content, &post.Created)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, ErrNoRecord
+		} else {
+			return nil, err
+		}
+	}
+
+	return post, nil
 }
