@@ -3,7 +3,7 @@ package main
 import "github.com/anxxuj/simple-blog-app/internal/validator"
 
 type PostForm struct {
-	Type    string
+	Name    string
 	Title   string
 	Content string
 	validator.Validator
