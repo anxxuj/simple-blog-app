@@ -11,7 +11,15 @@ import (
 )
 
 func (app *application) index(w http.ResponseWriter, r *http.Request) {
-	app.renderTemplate(w, http.StatusOK, "index.html", nil)
+	posts, err := app.posts.GetAll()
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	app.renderTemplate(w, http.StatusOK, "index.html", &tempateData{
+		Posts: posts,
+	})
 }
 
 func (app *application) postView(w http.ResponseWriter, r *http.Request) {

@@ -1,5 +1,14 @@
 {{define "title"}}Home{{end}}
 
 {{define "main"}}
-<h1>hello, world</h1>
+<ul class="blog-posts">
+  {{range .Posts}}
+  <li>
+    <span><time>{{humanDate .Created}}</time></span>
+    <a href="/post/view/{{.Id}}">{{.Title}}</a>
+  </li>
+  {{else}}
+  <li>No posts yet</li>
+  {{end}}
+</ul>
 {{end}}

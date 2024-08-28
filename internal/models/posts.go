@@ -52,3 +52,28 @@ func (m *PostModel) Get(id int) (*Post, error) {
 
 	return post, nil
 }
+
+func (m *PostModel) GetAll() ([]*Post, error) {
+	stmt := "SELECT id, title, content, created FROM posts ORDER BY id DESC"
+
+	rows, err := m.DB.Query(stmt)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	posts := []*Post{}
+
+	for rows.Next() {
+		post := &Post{}
+
+		err = rows.Scan(&post.Id, &post.Title, &post.Content, &post.Created)
+		if err != nil {
+			return nil, err
+		}
+
+		posts = append(posts, post)
+	}
+
+	return posts, nil
+}

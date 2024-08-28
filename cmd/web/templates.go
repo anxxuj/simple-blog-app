@@ -47,8 +47,9 @@ func newTemplateCache() (map[string]*template.Template, error) {
 }
 
 type tempateData struct {
-	Form any
-	Post *models.Post
+	Form  any
+	Post  *models.Post
+	Posts []*models.Post
 }
 
 func (app *application) renderTemplate(w http.ResponseWriter, status int, page string, data *tempateData) {
