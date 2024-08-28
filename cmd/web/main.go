@@ -8,12 +8,14 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/anxxuj/simple-blog-app/internal/models"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 type application struct {
 	errorLog      *log.Logger
 	infoLog       *log.Logger
+	posts         *models.PostModel
 	templateCache map[string]*template.Template
 }
 
@@ -40,6 +42,7 @@ func main() {
 	app := &application{
 		errorLog:      errorLog,
 		infoLog:       infoLog,
+		posts:         &models.PostModel{DB: db},
 		templateCache: templateCache,
 	}
 

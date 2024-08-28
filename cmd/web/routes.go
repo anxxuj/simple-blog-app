@@ -15,6 +15,9 @@ func (app *application) routes() http.Handler {
 	})
 
 	router.HandlerFunc(http.MethodGet, "/", app.index)
+	router.HandlerFunc(http.MethodGet, "/post/view/:id", app.postView)
+	router.HandlerFunc(http.MethodGet, "/post/add", app.postAdd)
+	router.HandlerFunc(http.MethodPost, "/post/add", app.postAddPost)
 
 	standard := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
 

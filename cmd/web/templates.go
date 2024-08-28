@@ -6,6 +6,8 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
+
+	"github.com/anxxuj/simple-blog-app/internal/models"
 )
 
 func newTemplateCache() (map[string]*template.Template, error) {
@@ -36,6 +38,8 @@ func newTemplateCache() (map[string]*template.Template, error) {
 }
 
 type tempateData struct {
+	Form any
+	Post *models.Post
 }
 
 func (app *application) renderTemplate(w http.ResponseWriter, status int, page string, data *tempateData) {

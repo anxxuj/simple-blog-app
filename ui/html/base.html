@@ -4,12 +4,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{template "title" .}} - Blog</title>
+  <title>Blog - {{template "title" .}}</title>
+  <style>
+    :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #01242E;
+      --heading-color: #EEEEEE;
+      --text-color: #DDDDDD;
+      --link-color: #8CC2DD;
+      --visited-color: #8B6FCB;
+    }
+
+    body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      line-height: 1.5;
+      color: var(--text-color);
+    }
+
+    h1 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline; 
+    }
+
+    nav a {
+      margin-right: 8px;
+    }
+
+    time {
+      font-family: monospace;
+      font-style: normal;
+      font-size: 15px;
+    }
+
+    main {
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 25px 0;
+      text-align: center;
+    }
+
+    .title:hover {
+      text-decoration: none;
+    }
+
+    .title h1 {
+      font-size: 1.5em;
+    }
+
+    ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+    }
+
+    ul.blog-posts li {
+      display: flex;
+    }
+
+    ul.blog-posts li span {
+      flex: 0 0 130px;
+    }
+
+    ul.blog-posts li a:visited {
+      color: var(--visited-color);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input[type="text"], input[type="submit"], textarea {
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      height: 300px;
+    }
+
+    .error {
+      color: #FF0000;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <a class="title" href="/">
+      <h1>Simple Blog</h1>
+    </a>
+    <nav>
+      <p>
+        <a href="/">Home</a>
+        <a href="/post/add">Add Post</a>
+      </p>
+    </nav>
+  </header>
+
   <main>
     {{template "main" .}}
   </main>
+
+  <footer>
+    <span>Powered by <a href="https://go.dev/">Go</a></span>
+  </footer>
 </body>
 </html>
 {{end}}

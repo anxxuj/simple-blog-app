@@ -1,0 +1,18 @@
+{{define "title"}}Add Post{{end}}
+
+{{define "main"}}
+<h1>{{.Form.Name}}</h1>
+<form action="" method="post" novalidate>
+  <label>Title:</label>
+  {{with .Form.FieldErrors.title}}
+  <div class="error">{{.}}</div>
+  {{end}}
+  <input type="text" name="title" value="{{.Form.Title}}">
+  <label>Content:</label>
+  {{with .Form.FieldErrors.content}}
+  <div class="error">{{.}}</div>
+  {{end}}
+  <textarea name="content">{{.Form.Content}}</textarea>
+  <input type="submit" value="Publish">
+</form>
+{{end}}
