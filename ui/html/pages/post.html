@@ -6,6 +6,9 @@
   <a class="link-btn" href="/post/edit/{{.Post.Id}}">
     <button>Edit Post</button>
   </a>
+  <a class="link-btn" href="/post/delete/{{.Post.Id}}">
+    <button>Delete Post</button>
+  </a>
 </p>
 <p><time>{{humanDate .Post.Created}}</time></p>
 <p>{{.Post.Content}}</p>
