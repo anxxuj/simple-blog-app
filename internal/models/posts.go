@@ -90,3 +90,14 @@ func (m *PostModel) Update(postId int, title, content string) error {
 
 	return nil
 }
+
+func (m *PostModel) Delete(id int) error {
+	stmt := "DELETE FROM posts WHERE id = ?"
+
+	_, err := m.DB.Exec(stmt, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
