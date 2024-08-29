@@ -77,3 +77,16 @@ func (m *PostModel) GetAll() ([]*Post, error) {
 
 	return posts, nil
 }
+
+func (m *PostModel) Update(postId int, title, content string) error {
+	stmt := `UPDATE posts
+	SET title = ?, content = ?, created = UTC_TIMESTAMP()
+	WHERE id = ?`
+
+	_, err := m.DB.Exec(stmt, title, content, postId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
