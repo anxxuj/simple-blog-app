@@ -14,13 +14,15 @@ func (app *application) routes() http.Handler {
 		app.notFound(w)
 	})
 
-	router.HandlerFunc(http.MethodGet, "/", app.index)
-	router.HandlerFunc(http.MethodGet, "/post/view/:id", app.postView)
-	router.HandlerFunc(http.MethodGet, "/post/add", app.postAdd)
-	router.HandlerFunc(http.MethodPost, "/post/add", app.postAddPost)
-	router.HandlerFunc(http.MethodGet, "/post/edit/:id", app.postEdit)
-	router.HandlerFunc(http.MethodPost, "/post/edit/:id", app.postEditPost)
-	router.HandlerFunc(http.MethodGet, "/post/delete/:id", app.postDelete)
+	dynamic := alice.New(app.sessionManager.LoadAndSave)
+
+	router.Handler(http.MethodGet, "/", dynamic.ThenFunc(app.index))
+	router.Handler(http.MethodGet, "/post/view/:id", dynamic.ThenFunc(app.postView))
+	router.Handler(http.MethodGet, "/post/add", dynamic.ThenFunc(app.postAdd))
+	router.Handler(http.MethodPost, "/post/add", dynamic.ThenFunc(app.postAddPost))
+	router.Handler(http.MethodGet, "/post/edit/:id", dynamic.ThenFunc(app.postEdit))
+	router.Handler(http.MethodPost, "/post/edit/:id", dynamic.ThenFunc(app.postEditPost))
+	router.Handler(http.MethodGet, "/post/delete/:id", dynamic.ThenFunc(app.postDelete))
 
 	standard := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
 
