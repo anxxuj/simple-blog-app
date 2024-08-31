@@ -82,6 +82,8 @@ func (app *application) postAddPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	app.sessionManager.Put(r.Context(), "flash", "Post created successfully")
+
 	http.Redirect(w, r, fmt.Sprintf("/post/view/%d", id), http.StatusSeeOther)
 }
 
@@ -151,6 +153,8 @@ func (app *application) postEditPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	app.sessionManager.Put(r.Context(), "flash", "Post updated successfully")
+
 	http.Redirect(w, r, fmt.Sprintf("/post/view/%d", id), http.StatusSeeOther)
 }
 
@@ -168,6 +172,8 @@ func (app *application) postDelete(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
+
+	app.sessionManager.Put(r.Context(), "flash", "Post deleted successfully")
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

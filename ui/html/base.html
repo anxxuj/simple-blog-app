@@ -120,6 +120,15 @@
     button:hover {
       cursor: pointer;
     }
+
+    .flash {
+      color: #0F5132;
+      background-color: #D1E7DD;
+      border: 1px solid #BADBCC;
+      border-radius: 4px;
+      font-size: 15px;
+      padding: 5px 10px;
+    }
   </style>
 </head>
 <body>
@@ -136,6 +145,9 @@
   </header>
 
   <main>
+    {{if .Flash}}
+    <div class="flash">{{.Flash}}</div>
+    {{end}}
     {{template "main" .}}
   </main>
 
