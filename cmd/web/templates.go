@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/anxxuj/simple-blog-app/internal/models"
+	"github.com/anxxuj/microblog/internal/models"
 )
 
 func humanDate(t time.Time) string {

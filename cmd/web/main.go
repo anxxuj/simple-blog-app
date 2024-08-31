@@ -11,7 +11,7 @@ import (
 
 	"github.com/alexedwards/scs/mysqlstore"
 	"github.com/alexedwards/scs/v2"
-	"github.com/anxxuj/simple-blog-app/internal/models"
+	"github.com/anxxuj/microblog/internal/models"
 	_ "github.com/go-sql-driver/mysql"
 )
 

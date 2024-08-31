@@ -1,4 +1,4 @@
-module github.com/anxxuj/simple-blog-app
+module github.com/anxxuj/microblog
 
 go 1.22.5
 

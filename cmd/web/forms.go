@@ -1,6 +1,6 @@
 package main
 
-import "github.com/anxxuj/simple-blog-app/internal/validator"
+import "github.com/anxxuj/microblog/internal/validator"
 
 type postForm struct {
 	Name    string

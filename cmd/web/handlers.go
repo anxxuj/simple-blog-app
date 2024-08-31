@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/anxxuj/simple-blog-app/internal/models"
+	"github.com/anxxuj/microblog/internal/models"
 	"github.com/julienschmidt/httprouter"
 )
 
