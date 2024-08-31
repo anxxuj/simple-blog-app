@@ -97,9 +97,17 @@
       margin-bottom: 10px;
     }
 
-    input[type="text"], input[type="submit"], textarea {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="submit"],
+    textarea {
       padding: 8px;
       margin-bottom: 10px;
+    }
+    
+    input[type="submit"] {
+      margin-top: 10px;
     }
 
     textarea {
@@ -129,6 +137,15 @@
       font-size: 15px;
       padding: 5px 10px;
     }
+
+    .alert {
+      color: #842029;
+      background-color: #F8D7DA;
+      border: 1px solid #F5C2C7;
+      border-radius: 4px;
+      font-size: 15px;
+      padding: 5px 10px;
+    }
   </style>
 </head>
 <body>
@@ -139,7 +156,12 @@
     <nav>
       <p>
         <a href="/">Home</a>
+        {{if .IsAuthenticated}}
         <a href="/post/add">Add Post</a>
+        <a href="/user/logout">Logout</a>
+        {{else}}
+        <a href="/user/login">Login</a>
+        {{end}}
       </p>
     </nav>
   </header>

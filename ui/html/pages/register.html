@@ -1,0 +1,31 @@
+{{define "title"}}Register{{end}}
+
+{{define "main"}}
+<h1>User Register</h1>
+<form action="" method="post" novalidate>
+  <label>Username:</label>
+  {{with .Form.FieldErrors.username}}
+  <div class="error">{{.}}</div>
+  {{end}}
+  <input type="text" name="username" value="{{.Form.Username}}">
+  <label>Email:</label>
+  {{with .Form.FieldErrors.email}}
+  <div class="error">{{.}}</div>
+  {{end}}
+  <input type="email" name="email" value="{{.Form.Email}}">
+  <label>Password:</label>
+  {{with .Form.FieldErrors.password}}
+  <div class="error">{{.}}</div>
+  {{end}}
+  <input type="password" name="password">
+  <label>Confirm Password:</label>
+  {{with .Form.FieldErrors.confirmPassword}}
+  <div class="error">{{.}}</div>
+  {{end}}
+  <input type="password" name="confirm-password">
+  <div>
+    <input type="submit" value="Register">
+  </div>
+  <p>already have an account? <a href="/user/login">login</a></p>
+</form>
+{{end}}
