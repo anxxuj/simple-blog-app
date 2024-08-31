@@ -50,7 +50,7 @@ func (app *application) postView(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) postAdd(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
-	data.Form = &PostForm{Name: "Add Post"}
+	data.Form = &postForm{Name: "Add Post"}
 
 	app.renderTemplate(w, http.StatusOK, "post_form.html", data)
 }
@@ -62,7 +62,7 @@ func (app *application) postAddPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	form := &PostForm{
+	form := &postForm{
 		Name:    "Add Post",
 		Title:   r.PostForm.Get("title"),
 		Content: r.PostForm.Get("content"),
@@ -106,7 +106,7 @@ func (app *application) postEdit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	form := &PostForm{
+	form := &postForm{
 		Name:    "Edit Post",
 		Title:   post.Title,
 		Content: post.Content,
@@ -133,7 +133,7 @@ func (app *application) postEditPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	form := &PostForm{
+	form := &postForm{
 		Name:    "Edit Post",
 		Title:   r.PostForm.Get("title"),
 		Content: r.PostForm.Get("content"),
