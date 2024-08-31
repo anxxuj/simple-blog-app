@@ -21,6 +21,7 @@ type application struct {
 	posts          *models.PostModel
 	sessionManager *scs.SessionManager
 	templateCache  map[string]*template.Template
+	users          *models.UserModel
 }
 
 func main() {
@@ -53,6 +54,7 @@ func main() {
 		posts:          &models.PostModel{DB: db},
 		sessionManager: sessionManager,
 		templateCache:  templateCache,
+		users:          &models.UserModel{DB: db},
 	}
 
 	srv := &http.Server{

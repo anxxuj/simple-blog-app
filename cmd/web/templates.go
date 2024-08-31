@@ -47,15 +47,17 @@ func newTemplateCache() (map[string]*template.Template, error) {
 }
 
 type tempateData struct {
-	Flash string
-	Form  any
-	Post  *models.Post
-	Posts []*models.Post
+	Flash           string
+	Form            any
+	IsAuthenticated bool
+	Post            *models.Post
+	Posts           []*models.Post
 }
 
 func (app *application) newTemplateData(r *http.Request) *tempateData {
 	return &tempateData{
-		Flash: app.sessionManager.PopString(r.Context(), "flash"),
+		Flash:           app.sessionManager.PopString(r.Context(), "flash"),
+		IsAuthenticated: app.isAuthenticated(r),
 	}
 }
 
