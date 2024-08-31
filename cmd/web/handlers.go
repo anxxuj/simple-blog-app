@@ -19,7 +19,6 @@ func (app *application) index(w http.ResponseWriter, r *http.Request) {
 
 	data := app.newTemplateData(r)
 	data.Posts = posts
-
 	app.renderTemplate(w, http.StatusOK, "index.html", data)
 }
 
@@ -44,14 +43,12 @@ func (app *application) postView(w http.ResponseWriter, r *http.Request) {
 
 	data := app.newTemplateData(r)
 	data.Post = post
-
 	app.renderTemplate(w, http.StatusOK, "post.html", data)
 }
 
 func (app *application) postAdd(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 	data.Form = &postForm{Name: "Add Post"}
-
 	app.renderTemplate(w, http.StatusOK, "post_form.html", data)
 }
 
@@ -71,7 +68,6 @@ func (app *application) postAddPost(w http.ResponseWriter, r *http.Request) {
 	if !form.Validate() {
 		data := app.newTemplateData(r)
 		data.Form = form
-
 		app.renderTemplate(w, http.StatusUnprocessableEntity, "post_form.html", data)
 		return
 	}
@@ -114,7 +110,6 @@ func (app *application) postEdit(w http.ResponseWriter, r *http.Request) {
 
 	data := app.newTemplateData(r)
 	data.Form = form
-
 	app.renderTemplate(w, http.StatusOK, "post_form.html", data)
 }
 
@@ -142,7 +137,6 @@ func (app *application) postEditPost(w http.ResponseWriter, r *http.Request) {
 	if !form.Validate() {
 		data := app.newTemplateData(r)
 		data.Form = form
-
 		app.renderTemplate(w, http.StatusUnprocessableEntity, "post_form.html", data)
 		return
 	}
@@ -186,7 +180,6 @@ func (app *application) userRegister(w http.ResponseWriter, r *http.Request) {
 
 	data := app.newTemplateData(r)
 	data.Form = &registerForm{}
-
 	app.renderTemplate(w, http.StatusOK, "register.html", data)
 }
 
@@ -212,7 +205,6 @@ func (app *application) userRegisterPost(w http.ResponseWriter, r *http.Request)
 	if !form.Validate() {
 		data := app.newTemplateData(r)
 		data.Form = form
-
 		app.renderTemplate(w, http.StatusUnprocessableEntity, "register.html", data)
 		return
 	}
@@ -224,14 +216,12 @@ func (app *application) userRegisterPost(w http.ResponseWriter, r *http.Request)
 
 			data := app.newTemplateData(r)
 			data.Form = form
-
 			app.renderTemplate(w, http.StatusUnprocessableEntity, "register.html", data)
 		} else if errors.Is(err, models.ErrDuplicateEmail) {
 			form.AddFieldError("email", "Email address is already in use")
 
 			data := app.newTemplateData(r)
 			data.Form = form
-
 			app.renderTemplate(w, http.StatusUnprocessableEntity, "register.html", data)
 		} else {
 			app.serverError(w, err)
@@ -253,7 +243,6 @@ func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
 
 	data := app.newTemplateData(r)
 	data.Form = &loginForm{}
-
 	app.renderTemplate(w, http.StatusOK, "login.html", data)
 }
 
@@ -277,7 +266,6 @@ func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
 	if !form.Validate() {
 		data := app.newTemplateData(r)
 		data.Form = form
-
 		app.renderTemplate(w, http.StatusUnprocessableEntity, "login.html", data)
 		return
 	}
@@ -285,11 +273,10 @@ func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
 	id, err := app.users.Authenticate(form.Username, form.Password)
 	if err != nil {
 		if errors.Is(err, models.ErrInvalidCredentials) {
-			form.AddNonFieldError("username or password is incorrect")
+			form.AddNonFieldError("Username or password is incorrect")
 
 			data := app.newTemplateData(r)
 			data.Form = form
-
 			app.renderTemplate(w, http.StatusUnprocessableEntity, "login.html", data)
 		} else {
 			app.serverError(w, err)
