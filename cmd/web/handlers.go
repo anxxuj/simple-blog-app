@@ -17,9 +17,10 @@ func (app *application) index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.renderTemplate(w, http.StatusOK, "index.html", &tempateData{
-		Posts: posts,
-	})
+	data := app.newTemplateData(r)
+	data.Posts = posts
+
+	app.renderTemplate(w, http.StatusOK, "index.html", data)
 }
 
 func (app *application) postView(w http.ResponseWriter, r *http.Request) {
@@ -41,15 +42,17 @@ func (app *application) postView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.renderTemplate(w, http.StatusOK, "post.html", &tempateData{
-		Post: post,
-	})
+	data := app.newTemplateData(r)
+	data.Post = post
+
+	app.renderTemplate(w, http.StatusOK, "post.html", data)
 }
 
 func (app *application) postAdd(w http.ResponseWriter, r *http.Request) {
-	app.renderTemplate(w, http.StatusOK, "post_form.html", &tempateData{
-		Form: &PostForm{Name: "Add Post"},
-	})
+	data := app.newTemplateData(r)
+	data.Form = &PostForm{Name: "Add Post"}
+
+	app.renderTemplate(w, http.StatusOK, "post_form.html", data)
 }
 
 func (app *application) postAddPost(w http.ResponseWriter, r *http.Request) {
@@ -66,9 +69,10 @@ func (app *application) postAddPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !form.Validate() {
-		app.renderTemplate(w, http.StatusUnprocessableEntity, "post_form.html", &tempateData{
-			Form: form,
-		})
+		data := app.newTemplateData(r)
+		data.Form = form
+
+		app.renderTemplate(w, http.StatusUnprocessableEntity, "post_form.html", data)
 		return
 	}
 
@@ -106,9 +110,10 @@ func (app *application) postEdit(w http.ResponseWriter, r *http.Request) {
 		Content: post.Content,
 	}
 
-	app.renderTemplate(w, http.StatusOK, "post_form.html", &tempateData{
-		Form: form,
-	})
+	data := app.newTemplateData(r)
+	data.Form = form
+
+	app.renderTemplate(w, http.StatusOK, "post_form.html", data)
 }
 
 func (app *application) postEditPost(w http.ResponseWriter, r *http.Request) {
@@ -133,9 +138,10 @@ func (app *application) postEditPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !form.Validate() {
-		app.renderTemplate(w, http.StatusUnprocessableEntity, "post_form.html", &tempateData{
-			Form: form,
-		})
+		data := app.newTemplateData(r)
+		data.Form = form
+
+		app.renderTemplate(w, http.StatusUnprocessableEntity, "post_form.html", data)
 		return
 	}
 
