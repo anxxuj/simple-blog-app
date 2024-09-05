@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"errors"
 	"strings"
-	"time"
 
 	"github.com/go-sql-driver/mysql"
 	"golang.org/x/crypto/bcrypt"
@@ -15,7 +14,6 @@ type User struct {
 	Username     string
 	Email        string
 	PasswordHash []byte
-	Created      time.Time
 }
 
 type UserModel struct {
@@ -28,8 +26,8 @@ func (m *UserModel) Insert(username, email, password string) error {
 		return err
 	}
 
-	stmt := `INSERT INTO users (username, email, password_hash, created)
-	VALUES(?, ?, ?, UTC_TIMESTAMP())`
+	stmt := `INSERT INTO users (username, email, password_hash)
+	VALUES(?, ?, ?)`
 
 	_, err = m.DB.Exec(stmt, username, email, string(passwordHash))
 	if err != nil {
