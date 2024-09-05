@@ -2,7 +2,7 @@
 
 {{define "main"}}
 {{range .Form.NonFieldErrors}}
-<div class="alert">{{.}}</div>
+<div class="alert-error">{{.}}</div>
 {{end}}
 <h1>User Login</h1>
 <form action="" method="post" novalidate>
