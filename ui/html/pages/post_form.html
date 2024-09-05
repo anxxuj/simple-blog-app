@@ -3,6 +3,7 @@
 {{define "main"}}
 <h1>{{.Form.Name}}</h1>
 <form action="" method="post" novalidate>
+  <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
   <label>Title:</label>
   {{with .Form.FieldErrors.title}}
   <div class="error">{{.}}</div>

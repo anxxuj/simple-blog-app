@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/anxxuj/microblog/internal/models"
+	"github.com/justinas/nosurf"
 )
 
 func humanDate(t time.Time) string {
@@ -47,6 +48,7 @@ func newTemplateCache() (map[string]*template.Template, error) {
 }
 
 type tempateData struct {
+	CSRFToken       string
 	Flash           string
 	Form            any
 	IsAuthenticated bool
@@ -56,6 +58,7 @@ type tempateData struct {
 
 func (app *application) newTemplateData(r *http.Request) *tempateData {
 	return &tempateData{
+		CSRFToken:       nosurf.Token(r),
 		Flash:           app.sessionManager.PopString(r.Context(), "flash"),
 		IsAuthenticated: app.isAuthenticated(r),
 	}

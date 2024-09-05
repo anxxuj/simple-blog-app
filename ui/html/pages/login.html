@@ -6,6 +6,7 @@
 {{end}}
 <h1>User Login</h1>
 <form action="" method="post" novalidate>
+  <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
   <label>Username:</label>
   {{with .Form.FieldErrors.username}}
   <div class="error">{{.}}</div>
